@@ -15,6 +15,14 @@
 ![일정](https://user-images.githubusercontent.com/70522500/145055271-a6bdfd8d-2c3e-4703-a314-e85cbfc72200.jpg)
 
 
+### 개발 환경
+
+FrontEnd: Vue.js, BootstrapVue
+
+BackEnd: Spring
+
+DB: mySql
+
 
 ### 회원/비회원/관리자
 
