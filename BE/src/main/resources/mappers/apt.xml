@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.vue.model.mapper.HouseMapMapper">
+
+	<select id="getSido" resultType="sidoGugunCodeDto">
+		select left(sidoCode,2) sidoCode, sidoName
+		from sidocode
+		order by sidoCode
+	</select>
+	
+	<select id="getGugunInSido" parameterType="string" resultType="sidoGugunCodeDto">
+		select left(gugunCode,5) gugunCode, gugunName
+		from guguncode
+		where left(gugunCode,2) = #{sido}
+		order by gugunCode
+	</select>
+	
+	<select id="getDongInGugun" parameterType="string" resultType="houseInfoDto">
+		select distinct dongName, dongCode
+		from houseinfo
+		where left(dongCode, 5) = #{gugun}
+		order by dongName
+	</select>
+	
+	<select id="getAptInDong" parameterType="string" resultType="houseInfoDto">
+		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+				(select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where dongCode = #{dong} 
+		order by aptName
+	</select>
+	
+	<!-- 
+	<select id="getGugunList" parameterType="string" resultType="houseInfoDto">
+        select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+                (select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+        from houseinfo h
+        left join sidocode si
+        on left(h.dongcode,2) = left(si.sidocode,2)
+        left join guguncode gu
+        on left(h.dongcode,5) = left(gu.guguncode,5)
+        where left(h.dongcode,5) = #{gugunCode}
+        order by h.dongName;
+    </select>
+     -->
+     
+    <select id="getAptNameList" parameterType="string" resultType="houseInfoDto">
+   		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+                (select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+        from houseinfo h
+        left join sidocode si
+        on left(h.dongcode,2) = left(si.sidocode,2)
+        left join guguncode gu
+        on left(h.dongcode,5) = left(gu.guguncode,5)
+        where h.aptName like concat('%',#{aptName},'%')
+   	</select>
+   	
+   	<select id="getZzimList" parameterType="string" resultType="houseInfoDto">
+   		select h.aptCode, h.aptName, h.buildyear, h.dongCode, h.dongName, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+                (select dealAmount from housedeal where aptCode = h.aptCode and no = (select max(no) from housedeal where aptCode = h.aptCode)) recentPrice
+        from houseinfo h
+        left join sidocode si
+        on left(h.dongcode,2) = left(si.sidocode,2)
+        left join guguncode gu
+        on left(h.dongcode,5) = left(gu.guguncode,5)
+        join zzim z on h.aptCode=z.aptCode
+        where userid=#{userid};
+   	</select>
+   	
+   	<insert id="addZzim" parameterType="ZzimDto">
+   		insert into zzim(aptCode,userid) values(#{aptCode},#{userId})
+   	</insert>
+    
+    <select id="doubleCheck" parameterType="ZzimDto" resultType="ZzimDto">
+    	select zzimCode from zzim where aptCode=#{aptCode} and userid=#{userId}
+    </select>
+    
+    <delete id="deleteZzim" parameterType="map">
+        delete from zzim where aptCode=#{aptCode} or userid=#{userId}
+    </delete>
+	
+</mapper>
