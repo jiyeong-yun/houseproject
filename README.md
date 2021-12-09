@@ -100,7 +100,7 @@ DB: mySql
 ![게시판 내용](https://user-images.githubusercontent.com/70522500/145055717-0e59ffc1-28e2-407a-9cdc-81edf5a49831.jpg)
 
 
-## Project setup
+## ✔ FrontEnd Project setup
 
 ```
 npm install
@@ -124,6 +124,7 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## ✔ BackEnd Project Setup
+#### 1. import file (Convert to Maven Project and Update Project)
+#### 2. Run Project As Sprin Boot App (VueApiApplication.java)
