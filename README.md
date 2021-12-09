@@ -104,6 +104,11 @@ DB: mySql
 
 ```
 npm install
+npm i bootstrap-vue
+npm i bootstrap
+npm i axios
+npm install --save jwt-decode
+npm i vuex-persistedstate
 ```
 
 ### Compiles and hot-reloads for development
