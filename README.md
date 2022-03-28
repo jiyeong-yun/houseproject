@@ -1,8 +1,8 @@
 ![logo](https://user-images.githubusercontent.com/70522500/145063439-2e0e667f-346d-4afc-97c6-2f6f0b7e1975.png)
 
-# Happy House🏡
+# Happy Heart House🏡
 
-아파트 실거래가 정보를 카카오맵 API와 제공하고 비교 분석해주는 사이트
+아파트 실거래가 정보를 카카오맵 API와 제공하고 내가 찜한 아파트를 비교 분석해주는 사이트
 
 ### 목적
 
